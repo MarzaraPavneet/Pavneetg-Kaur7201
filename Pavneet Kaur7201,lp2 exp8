@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class BankAccount {
+private:
+    string accountNumber;
+    double balance;
+    static int totalTransactions; // Static variable to track total transactions
+
+public:
+    BankAccount(string acctNum, double bal) : accountNumber(acctNum), balance(bal) {}
+
+    void deposit(double amount) {
+        balance += amount;
+        totalTransactions++; // Increment total transactions
+    }
+
+    bool withdraw(double amount) {
+        if (amount > balance)
+            return false;
+        balance -= amount;
+        totalTransactions++; // Increment total transactions
+        return true;
+    }
+
+    static int getTotalTransactions() {
+        return totalTransactions; // Static method to access total transactions
+    }
+
+    // Other member functions can be added here as needed
+};
+
+// Initialize static variable
+int BankAccount::totalTransactions = 0;
+
+// Example usage
+int main() {
+    BankAccount account1("12345", 1000.0);
+    BankAccount account2("67890", 500.0);
+
+    account1.deposit(200.0);
+    account2.withdraw(50.0);
+
+    cout << "Total transactions: " << BankAccount::getTotalTransactions() << endl;
+    return 0;
+}
