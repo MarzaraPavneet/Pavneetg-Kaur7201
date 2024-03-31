@@ -1,0 +1,32 @@
+#include <iostream>
+#include <bitset>
+class Number {
+private:
+    int decimalNumber;
+
+public:
+    // Constructor declaration
+    Number(int num);
+
+    // Function declaration
+    void convertToBinary();
+};
+
+// Constructor definition outside the class
+Number::Number(int num) : decimalNumber(num) {}
+
+// Function definition outside the class
+void Number::convertToBinary() {
+    std::cout << "The binary representation of " << decimalNumber
+              << " is " << std::bitset<8>(decimalNumber) << std::endl;
+}
+
+int main() {
+    // Creating an object of Number with a decimal value
+    Number myNumber(10);
+    
+    // Calling the function to convert to binary
+    myNumber.convertToBinary();
+    
+    return 0;
+}
