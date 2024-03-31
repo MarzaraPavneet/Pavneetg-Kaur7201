@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+class Point {
+private:
+    int x, y;
+
+public:
+    Point(int x = 0, int y = 0) : x(x), y(y) {}
+
+    // Overload the '+' operator using a friend function
+    friend Point operator+(const Point &p1, const Point &p2);
+
+    void display() {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+};
+
+// Define the friend function for '+' operator
+Point operator+(const Point &p1, const Point &p2) {
+    Point sum;
+    sum.x = p1.x + p2.x;
+    sum.y = p1.y + p2.y;
+    return sum;
+}
+
+// Example usage
+int main() {
+    Point point1(10, 5), point2(2, 4);
+    Point point3 = point1 + point2; // Uses overloaded '+' operator
+    point3.display(); // Should output (12, 9)
+    return 0;
+}
