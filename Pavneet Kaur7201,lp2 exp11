@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+
+// Base class
+class Employee {
+public:
+    virtual float calculateSalary() = 0; // Pure virtual function
+};
+
+// Derived class for full-time employees
+class FullTimeEmployee : public Employee {
+private:
+    float monthlySalary;
+public:
+    FullTimeEmployee(float salary) : monthlySalary(salary) {}
+    float calculateSalary() override {
+        return monthlySalary;
+    }
+};
+
+// Derived class for part-time employees
+class PartTimeEmployee : public Employee {
+private:
+    float hourlyRate;
+    int hoursWorked;
+public:
+    PartTimeEmployee(float rate, int hours) : hourlyRate(rate), hoursWorked(hours) {}
+    float calculateSalary() override {
+        return hourlyRate * hoursWorked;
+    }
+};
+
+// Derived class for managers
+class Manager : public FullTimeEmployee {
+private:
+    float bonus;
+public:
+    Manager(float salary, float bonusAmount) : FullTimeEmployee(salary), bonus(bonusAmount) {}
+    float calculateSalary() override {
+        return FullTimeEmployee::calculateSalary() + bonus;
+    }
+};
+
+// Example usage
+int main() {
+    FullTimeEmployee ftEmployee(30000);
+    PartTimeEmployee ptEmployee(100, 20);
+    Manager manager(50000, 5000);
+
+    cout << "Full-time employee salary: " << ftEmployee.calculateSalary() << endl;
+    cout << "Part-time employee salary: " << ptEmployee.calculateSalary() << endl;
+    cout << "Manager salary: " << manager.calculateSalary() << endl;
+
+    return 0;
+}
